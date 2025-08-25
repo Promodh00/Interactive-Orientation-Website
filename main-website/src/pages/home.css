@@ -1,0 +1,296 @@
+.App {
+    text-align: center;
+}
+
+.App-logo {
+    height: 40vmin;
+    pointer-events: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+    .App-logo {
+        animation: App-logo-spin infinite 20s linear;
+    }
+}
+
+.App-header {
+    background-color: #282c34;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-size: calc(10px + 2vmin);
+    color: white;
+}
+
+.App-link {
+    color: #61dafb;
+}
+
+@keyframes App-logo-spin {
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/* new */
+
+
+
+body {
+    margin: 0;
+    padding: 0;
+    background-color: #F2F7FD;
+    ;
+    /* font-family: 'Cereal', sans-serif; */
+}
+
+.welcome {
+    display: flex;
+    flex-direction: column;
+    /* Stack vertically by default */
+    align-items: center;
+    justify-content: center;
+    margin: 10px 10px;
+    gap: 4px;
+    text-align: center;
+}
+
+.welcome1 {
+    margin: 2px;
+    padding: 0;
+    /* color: linear-gradient(135deg, #DD383F, #FF858B); */
+    color: #DD383F;
+    font-size: 400%;
+    /* background: linear-gradient(135deg, #DD383F, #FF858B); */
+}
+
+.welcome2 {
+    margin: 2px;
+    padding: 0;
+    color: #4F4F4F;
+    font-size: 280%;
+    font-family: "Inter";
+}
+
+.welcome3 {
+    margin: 2px;
+    margin-top: 20px;
+    padding: 0;
+    color: #6F6969;
+    font-size: 140%;
+    font-family: "Inter";
+    font-weight: 500;
+}
+
+@media (min-width: 768px) {
+    body {
+        justify-content: flex-start;
+        padding-left: 100px;
+        padding-top: 10%;
+    }
+
+    .welcome {
+        align-items: flex-start;
+        text-align: left;
+    }
+
+    .welcome-button {
+        align-items: flex-start;
+        text-align: left;
+
+
+    }
+
+
+    .table-wrapper {
+        justify-content: flex-end;
+        padding-right: 50px;
+        /* add some right padding if you want */
+    }
+
+    .welcome1 {
+        margin: 2px;
+        padding: 0;
+        /* color: linear-gradient(135deg, #DD383F, #FF858B); */
+        color: #DD383F;
+        font-size: 600%;
+        /* background: linear-gradient(135deg, #DD383F, #FF858B); */
+    }
+
+    .welcome2 {
+        margin: 2px;
+        padding: 0;
+        color: #4F4F4F;
+        font-size: 280%;
+        font-family: "Inter";
+    }
+
+    .welcome3 {
+        margin: 2px;
+        margin-top: 20px;
+        padding: 0;
+        color: #6F6969;
+        font-size: 180%;
+        font-family: "Inter";
+        font-weight: 500;
+    }
+}
+
+.App {
+    display: flex;
+    flex-direction: column;
+    /* stacked vertically on mobile */
+    align-items: center;
+    margin-top: 1%;
+    gap: 40px;
+    padding: 0 20px;
+}
+
+@media (min-width: 768px) {
+    .App {
+        flex-direction: row;
+        align-items: flex-start;
+        justify-content: flex-start;
+        gap: 80px;
+        padding-left: 100px;
+    }
+
+    .welcome1 {
+        margin: 2px;
+        padding: 0;
+        /* color: linear-gradient(135deg, #DD383F, #FF858B); */
+        color: #DD383F;
+        font-size: 600%;
+        /* background: linear-gradient(135deg, #DD383F, #FF858B); */
+    }
+
+    .welcome2 {
+        margin: 2px;
+        padding: 0;
+        color: #4F4F4F;
+        font-size: 280%;
+        font-family: "Inter";
+    }
+
+    .welcome3 {
+        margin: 2px;
+        margin-top: 20px;
+        padding: 0;
+        color: #6F6969;
+        font-size: 180%;
+        font-family: "Inter";
+        font-weight: 500;
+    }
+}
+
+.welcome-button {
+    margin-top: 20px;
+    margin-left: 1%;
+    padding: 20px 40px;
+    font-family: 'inter';
+    font-weight: 400;
+    font-size: 1.2rem;
+    background: linear-gradient(135deg, #E84B58, #FF9D92);
+    /* background-color: #D93238; */
+    color: white;
+    border: none;
+    border-radius: 30px;
+    cursor: pointer;
+}
+
+.welcome-button:hover {
+    /* background-color: #555; */
+    transform: scale(1.15);
+
+}
+
+.custom-table {
+    width: 150%;
+
+    /* height: 60%; */
+    max-width: 80vh;
+    /* margin: 50px auto; */
+    border-collapse: separate;
+    table-layout: fixed;
+    border-spacing: 40px;
+}
+
+/* Merged cell styling */
+.merged-cell {
+    padding: 40px 10px;
+    height: 20vh;
+    text-align: center;
+    background-color: #ffffff;
+    cursor: pointer;
+    transition:
+        transform 0.3s ease,
+        box-shadow 0.3s ease,
+        border 0.3s ease,
+        background-color 0.3s ease;
+
+    border: 1px solid transparent;
+    border-radius: 30px;
+    font-family: "inter";
+    font-weight: 600;
+    /* hidden by default */
+}
+
+/* Hover effect — show border, shadow, and scale */
+.merged-cell:hover {
+    transform: scale(1.03);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+    /* background-color: #f2c6c6; */
+    border: 1px solid #ccc;
+    border-radius: 30px;
+}
+
+.table-wrapper {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    /* Center by default */
+    margin-top: 10px;
+}
+
+.cell-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    /* push content apart */
+    align-items: flex-start;
+    height: 100%;
+    position: relative;
+    padding-bottom: 10px;
+    /* spacing from bottom if needed */
+}
+
+.cell-button {
+    align-self: flex-end;
+    margin-right: 4px;
+
+    /* push to right */
+    padding: 3vh 3vh;
+    background-color: #EE757F;
+    /* background: linear-gradient(135deg, #D93238, #ff6b6b); */
+    color: white;
+    border: none;
+    border-radius: 5px;
+    transition: background 0.3s ease, transform 0.2s ease;
+    cursor: pointer;
+}
+
+.cell-button:hover {
+    background: linear-gradient(135deg, #c1272d, #ff4d4d);
+    transform: scale(1.05);
+    rotate: -15deg;
+}
+
+/* .cell-content h2 {
+    margin: 0;
+} */

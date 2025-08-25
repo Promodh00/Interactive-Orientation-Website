@@ -1,0 +1,83 @@
+/* Page wrapper */
+.building-page {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+/* Horizontally scrollable card selector */
+.card-selector {
+    display: flex;
+    overflow-x: auto;
+    gap: 12px;
+    padding-bottom: 10px;
+    scroll-snap-type: x mandatory;
+}
+
+.card-item {
+    flex: 0 0 auto;
+    background: #eee;
+    padding: 12px 20px;
+    border-radius: 8px;
+    scroll-snap-align: start;
+    cursor: pointer;
+    white-space: nowrap;
+}
+
+/* Main section */
+.building-main {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.building-image img {
+    width: 100%;
+    height: auto;
+    max-height: 400px;
+    object-fit: contain;
+    border-radius: 10px;
+}
+
+/* Dropdowns */
+.building-dropdowns {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.floor-dropdown {
+    background: #f8f8f8;
+    padding: 10px 15px;
+    border-radius: 8px;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
+}
+
+.floor-dropdown summary {
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.floor-dropdown ul {
+    margin-top: 8px;
+    padding-left: 20px;
+}
+
+/* Responsive: Side-by-side for large screens */
+@media (min-width: 768px) {
+    .building-main {
+        flex-direction: row;
+        gap: 40px;
+    }
+
+    .building-image,
+    .building-dropdowns {
+        flex: 1;
+    }
+
+    .building-image img {
+        max-width: 100%;
+        height: auto;
+    }
+}
