@@ -101,65 +101,70 @@ export default function MapPage() {
 
     return (
         <div className="mobile-page-wrapper">
-            {/* Left: Card Info Section */}
-            <div className="card-container">
-                <div className="card-scroll">
-                    {markerData.map((item) => (
-                        <div
-                            key={item.id}
-                            className="info-card"
-                            onClick={() => setSelectedMarker(item)}
-                            style={{ cursor: 'pointer' }}
-                        >
-                            <img src="/images/GPBuilding.png" alt={item.title} className="card-image" />
-                            <div className="card-text">
-                                <h3>{item.title}</h3>
-                                <p>Description</p>
-                            </div>
-                        </div>
-                    ))}
-                </div>
+            {/* ✅ Heading Section */}
+            <div className="main-title">
+                <h1>Let's Explore IIT Locations</h1>
             </div>
 
-            {/* Right: Map Section */}
-            <div className="map-container">
-                <MapContainer
-                    center={[6.9271, 79.8612]}
-                    zoom={16}
-                    scrollWheelZoom={true}
-                    className="leaflet-map"
-                >
-                    <TileLayer
-                        attribution='&copy; OpenStreetMap contributors'
-                        url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-                    />
+            {/* ✅ Content Area: Cards + Map */}
+            <div className="content-area">
+                {/* Cards Section */}
+                <div className="card-container">
+                    <div className="card-scroll">
+                        {markerData.map((item) => (
+                            <div
+                                key={item.id}
+                                className="info-card"
+                                onClick={() => setSelectedMarker(item)}
+                                style={{ cursor: 'pointer' }}
+                            >
+                                <img src="/images/GPBuilding.png" alt={item.title} className="card-image" />
+                                <div className="card-text">
+                                    <h3>{item.title}</h3>
+                                    <p>Description</p>
+                                    <Link to={`/building/${item.id}`}>
+                                        <button className="card-button">Details</button>
+                                    </Link>
+                                </div>
+                            </div>
+                        ))}
+                    </div>
+                </div>
 
-                    {/* Move map to selected marker */}
-                    {selectedMarker && <MapFlyTo center={[selectedMarker.lat, selectedMarker.lng]} />}
+                {/* Map Section */}
+                <div className="map-container">
+                    <MapContainer
+                        center={[6.9271, 79.8612]}
+                        zoom={16}
+                        scrollWheelZoom={true}
+                        className="leaflet-map"
+                    >
+                        <TileLayer
+                            attribution='&copy; OpenStreetMap contributors'
+                            url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+                        />
 
-                    {/* Main markers */}
-                    {markerData.map((marker) => (
-                        <Marker
-                            key={marker.id}
-                            position={[marker.lat, marker.lng]}
-                            icon={marker.highlighted ? highlightIcon() : defaultIcon()}
-                        >
-                            <Popup>{marker.title}</Popup>
-                        </Marker>
-                    ))}
+                        {selectedMarker && <MapFlyTo center={[selectedMarker.lat, selectedMarker.lng]} />}
 
-                    {/* Nearby markers (only when a location is selected) */}
-                    {selectedMarker?.nearby?.map((n) => (
-                        <Marker
-                            key={n.id}
-                            position={[n.lat, n.lng]}
-                            icon={nearbyIcon()}
-                        >
-                            <Popup>{n.title}</Popup>
-                        </Marker>
-                    ))}
-                </MapContainer>
+                        {markerData.map((marker) => (
+                            <Marker
+                                key={marker.id}
+                                position={[marker.lat, marker.lng]}
+                                icon={marker.highlighted ? highlightIcon() : defaultIcon()}
+                            >
+                                <Popup>{marker.title}</Popup>
+                            </Marker>
+                        ))}
+
+                        {selectedMarker?.nearby?.map((n) => (
+                            <Marker key={n.id} position={[n.lat, n.lng]} icon={nearbyIcon()}>
+                                <Popup>{n.title}</Popup>
+                            </Marker>
+                        ))}
+                    </MapContainer>
+                </div>
             </div>
         </div>
     );
+
 }

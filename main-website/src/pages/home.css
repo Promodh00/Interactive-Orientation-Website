@@ -166,6 +166,7 @@ body {
         padding: 0;
         /* color: linear-gradient(135deg, #DD383F, #FF858B); */
         color: #DD383F;
+        font-family: "Inter";
         font-size: 600%;
         /* background: linear-gradient(135deg, #DD383F, #FF858B); */
     }
@@ -192,7 +193,7 @@ body {
 .welcome-button {
     margin-top: 20px;
     margin-left: 1%;
-    padding: 20px 40px;
+    padding: 20px 50px;
     font-family: 'inter';
     font-weight: 400;
     font-size: 1.2rem;
@@ -202,6 +203,15 @@ body {
     border: none;
     border-radius: 30px;
     cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.welcome-button i {
+    font-size: 1.2rem;
+    /* match button text */
+    line-height: 1;
 }
 
 .welcome-button:hover {
