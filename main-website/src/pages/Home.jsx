@@ -14,7 +14,10 @@ export default function Home() {
                 <h1 className="welcome1">Technology</h1>
                 <h1 className="welcome3">Discover where learning meets fun, </h1>
                 <h1 className="welcome3">friends, and endless possibilities. </h1>
-                <button className="welcome-button"> Start Exploring <i className="fas fa-arrow-right"></i></button>
+                <Link to="/map">
+                    <button className="welcome-button"> Start Exploring <i className="fas fa-arrow-right"></i></button>
+                </Link>
+
             </div>
             <div className="table-wrapper">
                 <table className="custom-table">
@@ -23,11 +26,11 @@ export default function Home() {
                             <td colSpan="2" className="merged-cell top">
                                 <div className="cell-content">
                                     <h2>Common Guidlines</h2>
-                                    <Link to="/map">
-                                        <button className="cell-button">
-                                            <i className="fas fa-arrow-right"></i>
-                                        </button>
-                                    </Link>
+
+                                    <button className="cell-button">
+                                        <i className="fas fa-arrow-right"></i>
+                                    </button>
+
                                 </div>
                             </td>
                         </tr>

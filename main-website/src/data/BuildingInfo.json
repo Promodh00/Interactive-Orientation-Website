@@ -1,0 +1,23 @@
+[
+    {
+        "id": "1",
+        "title": "GP Square",
+        "image": "/images/floorPlan.png",
+        "description": "GP Square is the main academic building.",
+        "floors": [
+            {
+                "name": "1st Floor",
+                "sections": [
+                    {
+                        "name": "Library",
+                        "description": "This is one of three libraries IIT has."
+                    },
+                    {
+                        "name": "Admin Office",
+                        "description": "Handles administration for all departments."
+                    }
+                ]
+            }
+        ]
+    }
+]

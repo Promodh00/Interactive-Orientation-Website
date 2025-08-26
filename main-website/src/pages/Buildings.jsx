@@ -1,50 +1,43 @@
 import React from 'react';
-import './Buildings.css';
+import './buildings.css';
+import { useParams } from 'react-router-dom';
+import buildingData from '../data/BuildingInfo.json'; // Adjust path if needed
 
-const floors = [
-    {
-        floor: '1st Floor',
-        areas: [
-            { name: 'Library' },
-            { name: 'Administrator Office' },
-        ],
-    },
-    {
-        floor: '2nd Floor',
-        areas: [
-            { name: 'Labs' },
-            { name: 'Lecture Halls' },
-        ],
-    },
-];
+export default function BuildingInfoPage() {
+    const { id } = useParams(); // e.g., 'gp-square'
+    const building = buildingData.find(b => b.id === id);
 
-export default function Buildings() {
+    if (!building) return <p>Building not found.</p>;
+
     return (
-        <div className="building-page">
-            {/* Top: Card Selector */}
-            <div className="card-selector">
-                {[...Array(5)].map((_, i) => (
-                    <div className="card-item" key={i}>
-                        Building {i + 1}
-                    </div>
-                ))}
-            </div>
+        <div className="building-info-wrapper">
+            <h1 className="building-title">{building.title}</h1>
 
-            {/* Main Content: Image + Dropdowns */}
-            <div className="building-main">
-                <div className="building-image">
-                    <img src="/images/GPBuilding.png" alt="Building" />
+            <div className="building-content">
+                {/* Image Section */}
+                <div className="building-image-container">
+                    <img src={building.image} alt={building.title} className="building-image" />
                 </div>
 
+                {/* Dropdowns Section */}
                 <div className="building-dropdowns">
-                    {floors.map((floor, idx) => (
-                        <details key={idx} className="floor-dropdown">
-                            <summary>{floor.floor}</summary>
-                            <ul>
-                                {floor.areas.map((area, i) => (
-                                    <li key={i}>{area.name}</li>
-                                ))}
-                            </ul>
+                    {/* Description */}
+                    <details className="dropdown-section" open>
+                        <summary>Description</summary>
+                        <p>{building.description}</p>
+                    </details>
+
+                    {/* Floors and Sections */}
+                    {building.floors.map((floor, floorIndex) => (
+                        <details key={floorIndex} className="dropdown-section">
+                            <summary>{floor.name}</summary>
+
+                            {floor.sections.map((section, sectionIndex) => (
+                                <details key={sectionIndex} className="nested-dropdown">
+                                    <summary>{section.name}</summary>
+                                    <p>{section.description}</p>
+                                </details>
+                            ))}
                         </details>
                     ))}
                 </div>
