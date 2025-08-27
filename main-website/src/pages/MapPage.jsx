@@ -4,7 +4,11 @@ import './mapPage.css';
 import 'leaflet/dist/leaflet.css';
 import L from 'leaflet';
 import { MapContainer, TileLayer, Marker, Popup, useMap } from 'react-leaflet';
+import { useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 
+
+export let isUserLocationAvailable = false;
 // Set default icon globally
 L.Icon.Default.mergeOptions({
     iconRetinaUrl: require('leaflet/dist/images/marker-icon-2x.png'),
@@ -16,6 +20,11 @@ const markerData = [
     {
         id: 1,
         title: 'GP Square',
+        description: '435 Galle RD, Colombo 03, Sri Lanka',
+        schools: [
+            { name: "computing", background: '6cbae3', text: '166c9a' },
+            { name: "business", background: 'e38c9e', text: '911d35' }
+        ],
         lat: 6.9271,
         lng: 79.8612,
         highlighted: true,
@@ -27,6 +36,11 @@ const markerData = [
     {
         id: 2,
         title: 'Dialog Building',
+        description: '435 Galle RD, Colombo 03, Sri Lanka',
+        schools: [
+            { name: "computing", background: '6cbae3', text: '166c9a' },
+            { name: "business", background: 'e38c9e', text: '911d35' }
+        ],
         lat: 6.9285,
         lng: 79.8605,
         highlighted: false,
@@ -35,6 +49,11 @@ const markerData = [
     {
         id: 3,
         title: 'Spencer Building',
+        description: '435 Galle RD, Colombo 03, Sri Lanka',
+        schools: [
+            { name: "computing", background: '6cbae3', text: '166c9a' },
+            { name: "business", background: 'e38c9e', text: '911d35' }
+        ],
         lat: 6.9277,
         lng: 79.8620,
         highlighted: false,
@@ -43,24 +62,48 @@ const markerData = [
     {
         id: 4,
         title: 'IIT Kegalle',
+        description: '435 Galle RD, Colombo 03, Sri Lanka',
+        schools: [
+            { name: "computing", background: '6cbae3', text: '166c9a' },
+            { name: "business", background: 'e38c9e', text: '911d35' }
+        ],
         lat: 7.2511,
         lng: 80.3464,
         highlighted: false,
         nearby: [
-            { id: 'n3', title: 'Kegalle Library', lat: 7.2515, lng: 80.3469 },
-            { id: 'n4', title: 'Kegalle Hall', lat: 7.2508, lng: 80.3457 }
+            { name: "computing", background: '6cbae3', text: '166c9a' },
+            { name: "business", background: 'e38c9e', text: '911d35' }
         ]
     },
     {
         id: 5,
         title: 'IIT Galle',
+        description: '435 Galle RD, Colombo 03, Sri Lanka',
+        schools: [
+            { name: "computing", background: '6cbae3', text: '166c9a' },
+            { name: "business", background: 'e38c9e', text: '911d35' }
+        ],
         lat: 6.0535,
         lng: 80.2210,
         highlighted: false,
         nearby: [
-            { id: 'n5', title: 'Galle Lab', lat: 6.0539, lng: 80.2214 },
-            { id: 'n6', title: 'Galle Canteen', lat: 6.0530, lng: 80.2205 }
+            { name: "computing", background: '6cbae3', text: '166c9a' },
+            { name: "business", background: 'e38c9e', text: '911d35' }
         ]
+    },
+    {
+        id: 2,
+        title: 'IIT Ramakrishna',
+        description: '435 Galle RD, Colombo 03, Sri Lanka',
+        schools: [
+            { name: "computing", background: '6cbae3', text: '166c9a' },
+            { name: "business", background: 'e38c9e', text: '911d35' },
+            { name: "foundation", background: '95f181', text: '1a7e04' }
+        ],
+        lat: 6.9285,
+        lng: 79.8605,
+        highlighted: false,
+        nearby: []
     }
 ];
 
@@ -95,39 +138,154 @@ function MapFlyTo({ center }) {
     }
     return null;
 }
+function useUserLocation() {
+    const [location, setLocation] = useState(null);
 
+    useEffect(() => {
+        if ('geolocation' in navigator) {
+            navigator.geolocation.getCurrentPosition(
+                (position) => {
+                    setLocation({
+                        lat: position.coords.latitude,
+                        lng: position.coords.longitude,
+                    });
+                },
+                (error) => {
+                    console.error('Error getting location:', error);
+                }
+            );
+        } else {
+            console.warn('Geolocation not available');
+        }
+    }, []);
+
+    return location;
+}
+
+function getDistanceInKm(lat1, lon1, lat2, lon2) {
+    const R = 6371; // Radius of Earth in km
+    const dLat = ((lat2 - lat1) * Math.PI) / 180;
+    const dLon = ((lon2 - lon1) * Math.PI) / 180;
+    const a =
+        Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+        Math.cos((lat1 * Math.PI) / 180) *
+        Math.cos((lat2 * Math.PI) / 180) *
+        Math.sin(dLon / 2) *
+        Math.sin(dLon / 2);
+    const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+    return R * c;
+}
+
+function ResizeMap() {
+    const map = useMap();
+
+    useEffect(() => {
+        setTimeout(() => {
+            map.invalidateSize();
+        }, 100); // small delay ensures DOM is settled
+    }, [map]);
+
+    return null;
+}
+
+
+
+let clickTimer = null;
 export default function MapPage() {
     const [selectedMarker, setSelectedMarker] = useState(null);
+    const userLocation = useUserLocation();
+    const navigate = useNavigate();
+    function handleSingleClick(item) {
+        setSelectedMarker(item);
+    }
+
+    function handleDoubleClick(item) {
+        navigate(`/building/${item.id}`);
+    }
+    useEffect(() => {
+        if ('geolocation' in navigator) {
+            navigator.geolocation.getCurrentPosition(
+                (position) => {
+                    isUserLocationAvailable = true;
+                    console.log('Location available:', position.coords);
+                },
+                (error) => {
+                    isUserLocationAvailable = false;
+                    console.warn(' Location access denied or failed:', error.message);
+                }
+            );
+        } else {
+            isUserLocationAvailable = false;
+            console.warn('Geolocation not supported in this browser.');
+        }
+    }, []);
 
     return (
         <div className="mobile-page-wrapper">
-            {/* ✅ Heading Section */}
+            {/*  Heading Section */}
             <div className="main-title">
                 <h1>Let's Explore IIT Locations</h1>
             </div>
 
-            {/* ✅ Content Area: Cards + Map */}
+            {/*  Content Area: Cards + Map */}
             <div className="content-area">
                 {/* Cards Section */}
                 <div className="card-container">
                     <div className="card-scroll">
-                        {markerData.map((item) => (
-                            <div
-                                key={item.id}
-                                className="info-card"
-                                onClick={() => setSelectedMarker(item)}
-                                style={{ cursor: 'pointer' }}
-                            >
-                                <img src="/images/GPBuilding.png" alt={item.title} className="card-image" />
-                                <div className="card-text">
-                                    <h3>{item.title}</h3>
-                                    <p>Description</p>
-                                    <Link to={`/building/${item.id}`}>
-                                        <button className="card-button">Details</button>
-                                    </Link>
+                        {markerData.map((item) => {
+                            const distance = userLocation && getDistanceInKm(userLocation.lat, userLocation.lng, item.lat, item.lng);
+                            return (
+
+
+                                < div
+                                    key={item.id}
+                                    className="info-card"
+                                    onClick={() => {
+                                        if (clickTimer) {
+                                            clearTimeout(clickTimer);
+                                            clickTimer = null;
+                                        }
+                                        clickTimer = setTimeout(() => {
+                                            handleSingleClick(item);
+                                            clickTimer = null;
+                                        }, 250); // delay allows time to detect a double click
+                                    }}
+                                    onDoubleClick={() => {
+                                        clearTimeout(clickTimer);
+                                        clickTimer = null;
+                                        handleDoubleClick(item);
+                                    }}
+                                    style={{ cursor: 'pointer' }}
+                                >
+                                    <img src="/images/GPBuilding.png" alt={item.title} className="card-image" />
+                                    <div className="card-text">
+                                        <h3>{item.title}</h3>
+                                        <p>{item.description}</p>
+                                        <div className="distance-tag">
+                                            {distance && <p><strong>{distance.toFixed(2)} km</strong></p>}
+                                        </div>
+                                        {/*  Render school bubbles */}
+                                        <div className="school-badges">
+                                            {item.schools?.map((school, idx) => (
+                                                <span
+                                                    key={idx}
+                                                    className="school-badge"
+                                                    style={{
+                                                        backgroundColor: `#${school.background}`,
+                                                        color: `#${school.text}`,
+                                                    }}
+                                                >
+                                                    {school.name}
+                                                </span>
+                                            ))}
+                                        </div>
+                                        {/* <Link to={`/building/${item.id}`}>
+                                            <button className="card-button">Details</button>
+                                        </Link> */}
+                                    </div>
                                 </div>
-                            </div>
-                        ))}
+                            );
+                        })}
                     </div>
                 </div>
 
@@ -139,6 +297,7 @@ export default function MapPage() {
                         scrollWheelZoom={true}
                         className="leaflet-map"
                     >
+                        <ResizeMap />
                         <TileLayer
                             attribution='&copy; OpenStreetMap contributors'
                             url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
@@ -164,7 +323,9 @@ export default function MapPage() {
                     </MapContainer>
                 </div>
             </div>
-        </div>
+        </div >
+
     );
+
 
 }
