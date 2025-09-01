@@ -1,205 +1,74 @@
-.App {
-    text-align: center;
-}
-
-.App-logo {
-    height: 40vmin;
-    pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-    .App-logo {
-        animation: App-logo-spin infinite 20s linear;
-    }
-}
-
-.App-header {
-    background-color: #282c34;
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    font-size: calc(10px + 2vmin);
-    color: white;
-}
-
-.App-link {
-    color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-    from {
-        transform: rotate(0deg);
-    }
-
-    to {
-        transform: rotate(360deg);
-    }
-}
-
-/* new */
-
-
-
-body {
-    margin: 0;
-    padding: 0;
+.container {
+    max-width: 1280px;
+    max-height: 924px;
     background-color: #F2F7FD;
-    ;
-    /* font-family: 'Cereal', sans-serif; */
+    display: block;
+    margin: 8px auto;
+    /* margin-top: 8px; */
+
 }
 
-.welcome {
+/* body {
+    background-color: #c70000;
+} */
+
+
+.main {
     display: flex;
-    flex-direction: column;
-    /* Stack vertically by default */
-    align-items: center;
-    justify-content: center;
-    margin: 10px 10px;
-    gap: 4px;
-    text-align: center;
+    margin-top: 122px;
+
 }
 
-.welcome1 {
-    margin: 2px;
-    padding: 0;
-    /* color: linear-gradient(135deg, #DD383F, #FF858B); */
-    color: #DD383F;
-    font-size: 400%;
-    /* background: linear-gradient(135deg, #DD383F, #FF858B); */
+.left {
+    width: 50%;
+    text-align: left;
+
 }
 
-.welcome2 {
-    margin: 2px;
-    padding: 0;
-    color: #4F4F4F;
-    font-size: 280%;
-    font-family: "Inter";
+.left h2 {
+    font-family: 'inter';
+    font-weight: 600;
+    font-size: 32px;
+    color: #4f4f4f;
+    margin-bottom: 24px;
+
 }
 
-.welcome3 {
-    margin: 2px;
-    margin-top: 20px;
-    padding: 0;
-    color: #6F6969;
-    font-size: 140%;
-    font-family: "Inter";
-    font-weight: 500;
+.left .welcome {
+    margin-bottom: 8px;
 }
 
-@media (min-width: 768px) {
-    body {
-        justify-content: flex-start;
-        padding-left: 100px;
-        padding-top: 10%;
-    }
-
-    .welcome {
-        align-items: flex-start;
-        text-align: left;
-    }
-
-    .welcome-button {
-        align-items: flex-start;
-        text-align: left;
+.left h1 {
+    font-family: 'inter';
+    font-weight: 600;
+    font-size: 96px;
+    background: linear-gradient(135deg, #DD383F, #FF858B);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    color: transparent;
+    margin-top: 0;
+    margin-bottom: 0;
 
 
-    }
 
-
-    .table-wrapper {
-        justify-content: flex-end;
-        padding-right: 50px;
-        /* add some right padding if you want */
-    }
-
-    .welcome1 {
-        margin: 2px;
-        padding: 0;
-        /* color: linear-gradient(135deg, #DD383F, #FF858B); */
-        color: #DD383F;
-        font-size: 600%;
-        /* background: linear-gradient(135deg, #DD383F, #FF858B); */
-    }
-
-    .welcome2 {
-        margin: 2px;
-        padding: 0;
-        color: #4F4F4F;
-        font-size: 280%;
-        font-family: "Inter";
-    }
-
-    .welcome3 {
-        margin: 2px;
-        margin-top: 20px;
-        padding: 0;
-        color: #6F6969;
-        font-size: 180%;
-        font-family: "Inter";
-        font-weight: 500;
-    }
 }
 
-.App {
-    display: flex;
-    flex-direction: column;
-    /* stacked vertically on mobile */
-    align-items: center;
-    margin-top: 1%;
-    gap: 40px;
-    padding: 0 20px;
-}
-
-@media (min-width: 768px) {
-    .App {
-        flex-direction: row;
-        align-items: flex-start;
-        justify-content: flex-start;
-        gap: 80px;
-        padding-left: 100px;
-    }
-
-    .welcome1 {
-        margin: 2px;
-        padding: 0;
-        /* color: linear-gradient(135deg, #DD383F, #FF858B); */
-        color: #DD383F;
-        font-family: "Inter";
-        font-size: 600%;
-        /* background: linear-gradient(135deg, #DD383F, #FF858B); */
-    }
-
-    .welcome2 {
-        margin: 2px;
-        padding: 0;
-        color: #4F4F4F;
-        font-size: 280%;
-        font-family: "Inter";
-    }
-
-    .welcome3 {
-        margin: 2px;
-        margin-top: 20px;
-        padding: 0;
-        color: #6F6969;
-        font-size: 180%;
-        font-family: "Inter";
-        font-weight: 500;
-    }
+.right {
+    width: 50%;
+    /* background-color: #E84B58; */
 }
 
 .welcome-button {
-    margin-top: 20px;
+
     white-space: nowrap;
-    margin-left: 1%;
+    margin-top: 24px;
     padding: 20px 40px;
     font-family: 'inter';
     font-weight: 400;
-    font-size: 1.2rem;
+    font-size: 24px;
+    text-align: center;
     background: linear-gradient(135deg, #E84B58, #FF9D92);
-    /* background-color: #D93238; */
     color: white;
     border: none;
     border-radius: 30px;
@@ -207,86 +76,86 @@ body {
     display: inline-flex;
     align-items: center;
     gap: 10px;
+    max-width: 248px;
+    max-height: 56px;
 
-}
-
-.welcome-link {
-    text-decoration: none;
-    /* Removes underline if any */
-    display: inline-block;
-    max-width: 100%;
-    /* Makes the link respect the button size */
-}
-
-.welcome-button i {
-    display: inline-block;
-    /* font-size: 1.2rem; */
-    /* match button text */
-    /* line-height: 1; */
 }
 
 .welcome-button:hover {
-    /* background-color: #555; */
     transform: scale(1.15);
 
 }
 
 .custom-table {
-    width: 150%;
 
-    /* height: 60%; */
-    max-width: 80vh;
-    /* margin: 50px auto; */
-    border-collapse: separate;
-    table-layout: fixed;
-    border-spacing: 40px;
-}
-
-/* Merged cell styling */
-.merged-cell {
-    padding: 40px 10px;
-    height: 20vh;
-    text-align: center;
-    background-color: #ffffff;
-    cursor: pointer;
-    transition:
-        transform 0.3s ease,
-        box-shadow 0.3s ease,
-        border 0.3s ease,
-        background-color 0.3s ease;
-
-    border: 1px solid transparent;
-    border-radius: 30px;
-    font-family: "inter";
-    font-weight: 600;
-    /* hidden by default */
-}
-
-/* Hover effect — show border, shadow, and scale */
-.merged-cell:hover {
-    transform: scale(1.03);
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
-    /* background-color: #f2c6c6; */
-    border: 1px solid #ccc;
-    border-radius: 30px;
-}
-
-.table-wrapper {
     width: 100%;
-    display: flex;
-    justify-content: center;
-    /* Center by default */
-    margin-top: 10px;
+    height: 100%;
+    border-collapse: separate;
+    /* border-spacing: 0px 10px; */
+
+}
+
+.merged-cell {
+    background-color: #ffffff;
+    border-radius: 36px;
+
+    table-layout: fixed;
+    /* margin: 48px 1px; */
+    font-family: 'Inter';
+    font-weight: 600;
+    padding: 0;
+
+
+
+}
+
+.merged-cell.bottom {
+    width: 50%;
+    height: 50%;
+
+
+}
+
+.merged-cell.top {
+    height: 50%;
+}
+
+.merged-cell h2 {
+    text-align: left;
+    padding-left: 31px;
+}
+
+
+
+.cell-content {
+    /* padding-bottom: 48px; */
+    padding-top: 48px;
+    padding-right: 1px;
+    padding-left: 1px
+}
+
+
+.cell-bg-image {
+    position: absolute;
+    bottom: 0;
+    left: 18%;
+    /* width: 358px;
+    height: 216px; */
+    object-fit: contain;
+    z-index: 0;
+    margin-top: 45px;
+    pointer-events: none;
+
 }
 
 .cell-content {
-    padding-left: 30px;
+    /* padding-left: 30px; */
     padding-top: 0;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     /* push content apart */
-    align-items: flex-start;
+    /* align-items: flex-start; */
     height: 100%;
     position: relative;
     /* padding-bottom: 10px; */
@@ -294,44 +163,33 @@ body {
     /* spacing from bottom if needed */
 }
 
-.cell-bg-image {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    object-fit: contain;
-    /* makes the image fill and crop nicely */
-    z-index: 0;
-    margin-top: 45px;
-    /* opacity: 0.8; */
-    /* optional: make image dim for readability */
-    pointer-events: none;
-    /* lets clicks go through the image */
-}
-
 .cell-content h2 {
-    z-index: 1;
-    margin: 0;
-    margin-top: 0;
-
+    margin-top: 8%;
 }
+
 
 .cell-button {
     align-self: flex-end;
-    margin-right: 4px;
-
-    /* push to right */
+    margin-right: 10px;
+    margin-bottom: 10px;
+    height: 100px;
+    width: 99px;
     z-index: 0;
-    padding: 3vh 3vh;
+
     background-color: #EE757F;
-    /* background: linear-gradient(135deg, #D93238, #ff6b6b); */
     color: white;
     border: none;
-    border-radius: 5px;
+    border-radius: 24px;
     transition: background 0.3s ease, transform 0.2s ease;
     cursor: pointer;
     z-index: 1;
+    padding: 10px;
+}
+
+.cell-button i {
+    rotate: -45deg;
+    font-size: 28px;
+
 }
 
 .cell-button:hover {
@@ -340,6 +198,20 @@ body {
     rotate: -15deg;
 }
 
-/* .cell-content h2 {
+.spacer-row {
+    height: 5px;
+
+    padding: 0;
     margin: 0;
-} */
+    background: none;
+    border: none;
+
+}
+
+.cell-gap {
+    width: 20px;
+    background: none;
+    padding: 0;
+    border: none;
+
+}
