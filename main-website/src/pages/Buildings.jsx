@@ -11,12 +11,17 @@ export default function BuildingInfoPage() {
 
     return (
         <div className="building-info-wrapper">
-            <h1 className="building-title">{building.title}</h1>
+            <div className="building-title">
+                <h1 >{building.title}</h1>
+            </div>
+
 
             <div className="building-content">
                 {/* Image Section */}
                 <div className="building-image-container">
-                    <img src={building.image} alt={building.title} className="building-image" />
+                    <div className="image-box">
+                        <img src={building.image} alt={building.title} className="building-image" />
+                    </div>
                 </div>
 
                 {/* Dropdowns Section */}

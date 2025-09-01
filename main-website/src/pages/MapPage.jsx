@@ -20,6 +20,7 @@ const markerData = [
     {
         id: 1,
         title: 'GP Square',
+        bgColor: '#FF30300D',
         description: '435 Galle RD, Colombo 03, Sri Lanka',
         schools: [
             { name: "computing", background: '6cbae3', text: '166c9a' },
@@ -36,6 +37,7 @@ const markerData = [
     {
         id: 2,
         title: 'Dialog Building',
+        bgColor: '#30FF4C0D',
         description: '435 Galle RD, Colombo 03, Sri Lanka',
         schools: [
             { name: "computing", background: '6cbae3', text: '166c9a' },
@@ -49,6 +51,7 @@ const markerData = [
     {
         id: 3,
         title: 'Spencer Building',
+        bgColor: '#3067FF0D',
         description: '435 Galle RD, Colombo 03, Sri Lanka',
         schools: [
             { name: "computing", background: '6cbae3', text: '166c9a' },
@@ -61,7 +64,8 @@ const markerData = [
     },
     {
         id: 4,
-        title: 'IIT Kegalle',
+        title: 'IIT Kurunegala',
+        bgColor: '#30B3FF0D',
         description: '435 Galle RD, Colombo 03, Sri Lanka',
         schools: [
             { name: "computing", background: '6cbae3', text: '166c9a' },
@@ -78,6 +82,7 @@ const markerData = [
     {
         id: 5,
         title: 'IIT Galle',
+        bgColor: '#FF30300D',
         description: '435 Galle RD, Colombo 03, Sri Lanka',
         schools: [
             { name: "computing", background: '6cbae3', text: '166c9a' },
@@ -92,8 +97,9 @@ const markerData = [
         ]
     },
     {
-        id: 2,
+        id: 6,
         title: 'IIT Ramakrishna',
+        bgColor: '#FF30970D',
         description: '435 Galle RD, Colombo 03, Sri Lanka',
         schools: [
             { name: "computing", background: '6cbae3', text: '166c9a' },
@@ -222,108 +228,121 @@ export default function MapPage() {
 
     return (
         <div className="mobile-page-wrapper">
-            {/*  Heading Section */}
-            <div className="main-title">
-                <h1>Let's Explore IIT Locations</h1>
-            </div>
-
-            {/*  Content Area: Cards + Map */}
-            <div className="content-area">
-                {/* Cards Section */}
-                <div className="card-container">
-                    <div className="card-scroll">
-                        {markerData.map((item) => {
-                            const distance = userLocation && getDistanceInKm(userLocation.lat, userLocation.lng, item.lat, item.lng);
-                            return (
+            <div className='main'>
 
 
-                                < div
-                                    key={item.id}
-                                    className="info-card"
-                                    onClick={() => {
-                                        if (clickTimer) {
+                {/*  Content Area: Cards + Map */}
+                <div className="content-area">
+                    {/* Cards Section */}
+                    <div className="card-container">
+                        <div className="card-scroll">
+                            {markerData.map((item) => {
+                                const distance = userLocation && getDistanceInKm(userLocation.lat, userLocation.lng, item.lat, item.lng);
+                                return (
+
+
+                                    < div
+                                        key={item.id}
+                                        className="info-card"
+                                        onClick={() => {
+                                            if (clickTimer) {
+                                                clearTimeout(clickTimer);
+                                                clickTimer = null;
+                                            }
+                                            clickTimer = setTimeout(() => {
+                                                handleSingleClick(item);
+                                                clickTimer = null;
+                                            }, 250); // delay allows time to detect a double click
+                                        }}
+                                        onDoubleClick={() => {
                                             clearTimeout(clickTimer);
                                             clickTimer = null;
-                                        }
-                                        clickTimer = setTimeout(() => {
-                                            handleSingleClick(item);
-                                            clickTimer = null;
-                                        }, 250); // delay allows time to detect a double click
-                                    }}
-                                    onDoubleClick={() => {
-                                        clearTimeout(clickTimer);
-                                        clickTimer = null;
-                                        handleDoubleClick(item);
-                                    }}
-                                    style={{ cursor: 'pointer' }}
-                                >
-                                    <img src="/images/GPBuilding.png" alt={item.title} className="card-image" />
-                                    <div className="card-text">
-                                        <h3>{item.title}</h3>
-                                        <p>{item.description}</p>
-                                        <div className="distance-tag">
-                                            {distance && <p><strong>{distance.toFixed(2)} km</strong></p>}
+                                            handleDoubleClick(item);
+                                        }}
+                                        style={{ cursor: 'pointer' }}
+
+                                    >
+                                        <div style={{
+                                            width: '120px',
+                                            height: '120px',
+                                            backgroundColor: item.bgColor,
+                                            display: 'flex',
+                                            alignItems: 'center',
+                                            justifyContent: 'center',
+                                            borderRadius: '8px',
+                                            marginTop: '8px',
+                                            marginLeft: '10px'
+                                        }}>
+                                            <img src="/images/image 35.png" alt={item.title} className="card-image" />
                                         </div>
-                                        {/*  Render school bubbles */}
-                                        <div className="school-badges">
-                                            {item.schools?.map((school, idx) => (
-                                                <span
-                                                    key={idx}
-                                                    className="school-badge"
-                                                    style={{
-                                                        backgroundColor: `#${school.background}`,
-                                                        color: `#${school.text}`,
-                                                    }}
-                                                >
-                                                    {school.name}
-                                                </span>
-                                            ))}
-                                        </div>
-                                        {/* <Link to={`/building/${item.id}`}>
+                                        <div className="card-text">
+                                            <h3>{item.title}</h3>
+                                            <p>{item.description}</p>
+                                            <div className="distance-tag">
+                                                {distance && <p><strong>{distance.toFixed(2)} km</strong></p>}
+                                            </div>
+                                            {/*  Render school bubbles */}
+                                            <div className="school-badges">
+                                                {item.schools?.map((school, idx) => (
+                                                    <span
+                                                        key={idx}
+                                                        className="school-badge"
+                                                        style={{
+                                                            backgroundColor: `#${school.background}`,
+                                                            color: `#${school.text}`,
+                                                        }}
+                                                    >
+                                                        {school.name}
+                                                    </span>
+                                                ))}
+                                            </div>
+                                            {/* <Link to={`/building/${item.id}`}>
                                             <button className="card-button">Details</button>
                                         </Link> */}
+                                        </div>
                                     </div>
-                                </div>
-                            );
-                        })}
+                                );
+                            })}
+                        </div>
+                    </div>
+
+                    {/* Map Section */}
+                    <div className="map-container">
+                        <MapContainer
+                            center={[6.9271, 79.8612]}
+                            zoom={16}
+                            scrollWheelZoom={true}
+                            className="leaflet-map"
+                        >
+                            <ResizeMap />
+                            <TileLayer
+                                attribution='&copy; OpenStreetMap contributors'
+                                url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+                            />
+
+                            {selectedMarker && <MapFlyTo center={[selectedMarker.lat, selectedMarker.lng]} />}
+
+                            {markerData.map((marker) => (
+                                <Marker
+                                    key={marker.id}
+                                    position={[marker.lat, marker.lng]}
+                                    icon={marker.highlighted ? highlightIcon() : defaultIcon()}
+                                >
+                                    <Popup>{marker.title}</Popup>
+                                </Marker>
+                            ))}
+
+                            {selectedMarker?.nearby?.map((n) => (
+                                <Marker key={n.id} position={[n.lat, n.lng]} icon={nearbyIcon()}>
+                                    <Popup>{n.title}</Popup>
+                                </Marker>
+                            ))}
+                        </MapContainer>
                     </div>
                 </div>
-
-                {/* Map Section */}
-                <div className="map-container">
-                    <MapContainer
-                        center={[6.9271, 79.8612]}
-                        zoom={16}
-                        scrollWheelZoom={true}
-                        className="leaflet-map"
-                    >
-                        <ResizeMap />
-                        <TileLayer
-                            attribution='&copy; OpenStreetMap contributors'
-                            url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-                        />
-
-                        {selectedMarker && <MapFlyTo center={[selectedMarker.lat, selectedMarker.lng]} />}
-
-                        {markerData.map((marker) => (
-                            <Marker
-                                key={marker.id}
-                                position={[marker.lat, marker.lng]}
-                                icon={marker.highlighted ? highlightIcon() : defaultIcon()}
-                            >
-                                <Popup>{marker.title}</Popup>
-                            </Marker>
-                        ))}
-
-                        {selectedMarker?.nearby?.map((n) => (
-                            <Marker key={n.id} position={[n.lat, n.lng]} icon={nearbyIcon()}>
-                                <Popup>{n.title}</Popup>
-                            </Marker>
-                        ))}
-                    </MapContainer>
-                </div>
             </div>
-        </div >
+        </div>
+
 
     );
 
