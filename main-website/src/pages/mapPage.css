@@ -1,4 +1,4 @@
-.main {
+.mapMain {
     max-width: 1280px;
     max-height: 936px;
     background-color: #ffffff;
@@ -42,7 +42,7 @@
 
 
 .card-container {
-    background-color: antiquewhite;
+    background-color: rgb(255, 255, 255);
     flex: 0 0 50%;
     /* Only take 25% of the width */
     padding: 0;
@@ -65,7 +65,7 @@
     scroll-snap-align: start;
     gap: 12px;
     width: 99%;
-    border-bottom: 1px solid #E4E4E4;
+    border-bottom: 1px solid #757171;
     /* Thin black line */
     border-radius: 10px 10px 0 0;
     box-shadow: none;
