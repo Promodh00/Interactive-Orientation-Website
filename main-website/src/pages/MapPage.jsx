@@ -228,7 +228,7 @@ export default function MapPage() {
 
     return (
         <div className="mobile-page-wrapper">
-            <div className='main'>
+            <div className='mapMain'>
 
 
                 {/*  Content Area: Cards + Map */}
